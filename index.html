@@ -123,6 +123,13 @@
         }
         .contact-banner h2 { margin-bottom: 10px; }
         .contact-banner p { color: var(--text-secondary); margin-bottom: 30px; }
+        .contact-details {
+            display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 30px;
+        }
+        .contact-item {
+            display: flex; align-items: center; gap: 10px; color: var(--text-primary); font-weight: 500;
+        }
+        .contact-item i { color: var(--accent); }
 
         /* --- STYLE DU POPUP (MODAL) --- */
         .modal-overlay {
@@ -192,7 +199,7 @@
         <div class="hero-bg"></div>
         <div class="hero-content">
             <h1>L'Ingénierie <br>par la pratique.</h1>
-            <p>Étudiant en BUT GEII. Je ne fais pas que du code, je conçois des systèmes complets alliant Mécanique et Électronique.</p>
+            <p>Étudiant en BUT GEII, je développe et conçois des systèmes complexes, alliant mécanique, électronique et programmation.</p>
             <a href="#projects" class="hero-btn">Voir mes projets</a>
         </div>
     </section>
@@ -203,8 +210,9 @@
         <div id="about" style="margin-bottom: 40px; padding-bottom: 20px;">
             <h2>Pourquoi mon profil ?</h2>
             <p style="color: var(--text-secondary); max-width: 800px; font-size: 1rem;">
-                Je suis un "Maker" passionné. Au-delà de ma formation en <strong>BUT GEII</strong>, je consacre mon temps libre à mes passions comme mes projets de robotique et le sport. 
-                Mon point fort est ma polyvalence : je peux passer de la conception d'un PCB à la modélisation 3D, jusqu'au code.
+                Je suis un "Maker" passionné. Au-delà de ma formation en <strong>BUT GEII</strong>, je consacre mon temps libre à mes passions comme mes projets de robotique et le sport.
+                <br><br>
+                Mes atouts majeurs ? <strong>Ma curiosité et ma polyvalence</strong>. Cette envie de toucher à tout me permet de passer naturellement de la conception d'un PCB à la modélisation 3D, jusqu'au développement du code embarqué.
             </p>
         </div>
 
@@ -212,20 +220,15 @@
         <h2>Mes Réalisations</h2>
         <div class="grid-cards" id="projects">
             
-            <!-- Projet 1 : SpotMicro (MISE A JOUR AVEC VIDEO) -->
+            <!-- Projet 1 : SpotMicro -->
             <div class="card">
                 <a href="https://youtu.be/dD-qDrPlTAk" target="_blank" class="card-image-container" style="display: block; text-decoration: none;">
                     <span class="card-badge">POPULAIRE</span>
-                    
-                    <!-- Miniature YouTube du SpotMicro -->
                     <img src="https://img.youtube.com/vi/dD-qDrPlTAk/maxresdefault.jpg" alt="SpotMicro Robot" class="card-img">
-                    
-                    <!-- Bouton Play superposé -->
                     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(139, 92, 246, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);">
                         <i class="fas fa-play" style="color: white; font-size: 24px; padding-left: 4px;"></i>
                     </div>
                 </a>
-                
                 <div class="card-info">
                     <h3>SpotMicro <span class="card-rating"><i class="fas fa-star" style="color:var(--text-primary); font-size:0.8rem;"></i> 5.0</span></h3>
                     <p class="card-desc">Robot quadrupède 12 servomoteurs</p>
@@ -282,9 +285,15 @@
         <!-- CONTACT -->
         <br><br>
         <div class="contact-banner" id="contact" style="background: linear-gradient(135deg, #18181b 0%, #2e1065 100%);">
-            <h2>Prêt à innover ?</h2>
-            <p>Je recherche une école d'ingénieur pour transformer mes prototypes en solutions réelles.</p>
-            <a href="mailto:ton.email@gmail.com" class="hero-btn">Discuter de mon profil</a>
+            <h2>Prêt à collaborer ?</h2>
+            <p>Je recherche une école d'ingénieur en <strong>alternance</strong> pour apprendre à résoudre des problèmes complexes et concrétiser des solutions innovantes.</p>
+            
+            <div class="contact-details">
+                <div class="contact-item"><i class="fas fa-envelope"></i> m.milic.vuk@gmail.com</div>
+                <div class="contact-item"><i class="fas fa-phone"></i> 06 68 31 16 39</div>
+            </div>
+
+            <a href="mailto:m.milic.vuk@gmail.com" class="hero-btn">Me contacter</a>
         </div>
 
     </div>
