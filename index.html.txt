@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Vuk Milic | Candidat Ingénieur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-color: #050505;       
+            --card-bg: #18181b;        
+            --accent: #8b5cf6;         
+            --text-primary: #ffffff;   
+            --text-secondary: #a1a1aa; 
+            --radius-round: 32px;      
+            --radius-card: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        .floating-nav-container {
+            position: fixed; top: 20px; left: 0; width: 100%;
+            display: flex; justify-content: center; z-index: 1000; padding: 0 20px;
+        }
+
+        .floating-nav {
+            background: rgba(30, 30, 35, 0.85); backdrop-filter: blur(12px);
+            padding: 8px 10px; border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex; align-items: center; gap: 5px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            max-width: 600px; width: 100%; justify-content: space-between;
+        }
+
+        .nav-logo { font-weight: 800; padding-left: 20px; font-size: 1.1rem; color: var(--text-primary); }
+        .nav-logo span { color: var(--accent); }
+        .nav-items { display: flex; align-items: center; }
+        .nav-link {
+            text-decoration: none; color: var(--text-secondary); font-weight: 500;
+            padding: 10px 20px; border-radius: 30px; font-size: 0.9rem; transition: 0.2s;
+        }
+        .nav-link:hover { color: white; background: rgba(255,255,255,0.05); }
+        
+        .nav-btn-highlight {
+            background: var(--accent); color: white; border-radius: 50%;
+            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            margin-left: 5px; transition: transform 0.2s; text-decoration: none;
+        }
+        .nav-btn-highlight:hover { transform: scale(1.05); }
+
+        /* --- HERO --- */
+        .hero {
+            position: relative; height: 90vh; width: 100%;
+            display: flex; align-items: center; padding: 0 5%;
+            overflow: hidden; background: #000;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(5,5,5,0.9) 20%, rgba(5,5,5,0.1) 100%), 
+                        url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover; background-position: center; z-index: 0;
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 700px; padding-top: 60px; }
+        .hero h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .hero p { font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 30px; max-width: 550px; font-weight: 400; }
+        .hero-btn {
+            display: inline-block; background: var(--text-primary); color: black;
+            font-weight: 700; padding: 15px 30px; border-radius: 12px;
+            text-decoration: none; transition: transform 0.2s;
+        }
+        .hero-btn:hover { transform: translateY(-2px); background: #e2e2e2; }
+
+        /* --- SECTIONS --- */
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+        h2 { font-size: 1.8rem; margin-bottom: 30px; font-weight: 700; color: var(--text-primary); }
+
+        /* --- SKILLS --- */
+        .skills-section { padding: 40px 0 60px 0; border-top: 1px solid #27272a; margin-top: 60px; }
+        .skills-grid-display { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+        .skill-item-row { display: flex; align-items: flex-start; gap: 16px; padding: 16px; border-radius: 12px; transition: 0.2s; }
+        .skill-item-row:hover { background: rgba(255,255,255,0.03); }
+        .skill-icon-large { font-size: 1.6rem; color: var(--text-primary); min-width: 40px; padding-top: 2px; }
+        .skill-details h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: var(--text-primary); }
+        .skill-details p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.4; }
+
+        /* --- CARDS --- */
+        .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+        .card {
+            background: transparent; border-radius: var(--radius-card);
+            transition: 0.3s; cursor: pointer; display: block; text-decoration: none;
+        }
+        .card-image-container {
+            width: 100%; aspect-ratio: 16 / 9; border-radius: var(--radius-card);
+            overflow: hidden; position: relative; margin-bottom: 12px; background: #202020;
+        }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .card:hover .card-img { transform: scale(1.05); }
+        .card-badge {
+            position: absolute; top: 12px; left: 12px;
+            background: rgba(255, 255, 255, 0.9); color: black;
+            font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 4px;
+        }
+        .card-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 2px; display: flex; justify-content: space-between; color: var(--text-primary); }
+        .card-rating { display: flex; align-items: center; gap: 4px; font-weight: 400; font-size: 0.9rem; }
+        .card-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 4px; }
+        .card-price { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); margin-top: 6px; }
+        .card-price span { font-weight: 400; color: var(--text-secondary); }
+
+        /* --- CONTACT --- */
+        .contact-banner {
+            background: var(--card-bg); border-radius: 24px; padding: 60px;
+            text-align: center; margin-top: 60px; position: relative; overflow: hidden;
+        }
+        .contact-banner h2 { margin-bottom: 10px; }
+        .contact-banner p { color: var(--text-secondary); margin-bottom: 30px; }
+
+        /* --- STYLE DU POPUP (MODAL) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+            z-index: 2000; display: none; opacity: 0; transition: opacity 0.3s ease;
+            justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-content {
+            background: #18181b; width: 100%; max-width: 800px;
+            border-radius: 24px; border: 1px solid #333;
+            max-height: 90vh; overflow-y: auto;
+            position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+
+        .modal-header { position: relative; height: 300px; }
+        .modal-header img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-close {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(0,0,0,0.5); color: white; border: none;
+            width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+            transition: 0.2s;
+        }
+        .modal-close:hover { background: white; color: black; }
+
+        .modal-body { padding: 40px; }
+        .modal-tags { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+        .tag { 
+            background: rgba(139, 92, 246, 0.1); color: var(--accent); 
+            padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; 
+        }
+        .modal-section { margin-bottom: 30px; }
+        .modal-section h4 { color: white; font-size: 1.2rem; margin-bottom: 10px; border-left: 3px solid var(--accent); padding-left: 10px;}
+        .modal-section p { color: #a1a1aa; line-height: 1.6; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-link { display: none; }
+            .floating-nav { width: auto; padding: 8px 15px; }
+            .hero h1 { font-size: 2.5rem; }
+            .skills-grid-display { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <div class="floating-nav-container">
+        <nav class="floating-nav">
+            <div class="nav-logo">Vuk<span>.Milic</span></div>
+            <div class="nav-items">
+                <a href="#about" class="nav-link">Profil</a>
+                <a href="#projects" class="nav-link">Projets</a>
+                <a href="#skills" class="nav-link">Compétences</a>
+            </div>
+            <a href="#contact" class="nav-btn-highlight"><i class="fas fa-paper-plane"></i></a>
+        </nav>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>L'Ingénierie <br>par la pratique.</h1>
+            <p>Étudiant en BUT GEII. Je ne fais pas que du code, je conçois des systèmes complets alliant Mécanique et Électronique.</p>
+            <a href="#projects" class="hero-btn">Voir mes projets</a>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- ABOUT -->
+        <div id="about" style="margin-bottom: 40px; padding-bottom: 20px;">
+            <h2>Pourquoi mon profil ?</h2>
+            <p style="color: var(--text-secondary); max-width: 800px; font-size: 1rem;">
+                Je suis un "Maker" passionné. Au-delà de ma formation en <strong>BUT GEII</strong>, je consacre mon temps libre à mes passions comme mes projets de robotique et le sport. 
+                Mon point fort est ma polyvalence : je peux passer de la conception d'un PCB à la modélisation 3D, jusqu'au code.
+            </p>
+        </div>
+
+        <!-- PROJETS -->
+        <h2>Mes Réalisations</h2>
+        <div class="grid-cards" id="projects">
+            
+            <!-- Projet 1 : SpotMicro (MISE A JOUR AVEC VIDEO) -->
+            <div class="card">
+                <a href="https://youtu.be/dD-qDrPlTAk" target="_blank" class="card-image-container" style="display: block; text-decoration: none;">
+                    <span class="card-badge">POPULAIRE</span>
+                    
+                    <!-- Miniature YouTube du SpotMicro -->
+                    <img src="https://img.youtube.com/vi/dD-qDrPlTAk/maxresdefault.jpg" alt="SpotMicro Robot" class="card-img">
+                    
+                    <!-- Bouton Play superposé -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(139, 92, 246, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);">
+                        <i class="fas fa-play" style="color: white; font-size: 24px; padding-left: 4px;"></i>
+                    </div>
+                </a>
+                
+                <div class="card-info">
+                    <h3>SpotMicro <span class="card-rating"><i class="fas fa-star" style="color:var(--text-primary); font-size:0.8rem;"></i> 5.0</span></h3>
+                    <p class="card-desc">Robot quadrupède 12 servomoteurs</p>
+                    <p class="card-desc">Conception PCB & C++</p>
+                    <p class="card-price">Complet <span>/ Open Source</span></p>
+                </div>
+            </div>
+
+            <!-- Projet 2 -->
+            <div class="card">
+                <a href="https://youtu.be/Fwk-eAgMldw" target="_blank" class="card-image-container" style="display: block; text-decoration: none;">
+                    <img src="https://img.youtube.com/vi/Fwk-eAgMldw/maxresdefault.jpg" alt="Unitree Go1 Nerf" class="card-img">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; background: rgba(139, 92, 246, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);">
+                        <i class="fas fa-play" style="color: white; font-size: 24px; padding-left: 4px;"></i>
+                    </div>
+                </a>
+                <div class="card-info">
+                    <h3>Unitree GO1 NERF <span class="card-rating"><i class="fas fa-star" style="color:var(--text-primary); font-size:0.8rem;"></i> 4.9</span></h3>
+                    <p class="card-desc">Pilotage via Manette PS5</p>
+                    <p class="card-desc">Raspberry Pi 5 & Python</p>
+                    <p class="card-price">Hack <span>/ Industriel</span></p>
+                </div>
+            </div>
+
+            <!-- Projet 3 (MODIFIÉ : OUVRE LE POPUP) -->
+            <div class="card" onclick="openModal('modal-bras')">
+                <div class="card-image-container">
+                    <span class="card-badge">EN COURS</span>
+                    <img src="https://placehold.co/600x600/18181b/8b5cf6?text=Bras+Robot" alt="Bras Robot" class="card-img">
+                </div>
+                <div class="card-info">
+                    <h3>Bras Robotisé <span class="card-rating"><i class="fas fa-plus-circle" style="color:var(--accent); font-size:0.9rem;"></i> Détails</span></h3>
+                    <p class="card-desc">Intégration sur base mobile</p>
+                    <p class="card-desc">SolidWorks & Cinématique</p>
+                    <p class="card-price">Autonome <span>/ Voir plus</span></p>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- SKILLS -->
+        <div class="skills-section" id="skills">
+            <h2>Mon Arsenal Technique</h2>
+            <div class="skills-grid-display">
+                <div class="skill-item-row"><div class="skill-icon-large"><i class="fas fa-microchip"></i></div><div class="skill-details"><h4>Informatique Embarquée</h4><p>Programmation C/C++, ESP32, STM32, RTOS.</p></div></div>
+                <div class="skill-item-row"><div class="skill-icon-large"><i class="fas fa-robot"></i></div><div class="skill-details"><h4>Robotique & IA</h4><p>ROS 2, Python, OpenCV, Cinématique inverse.</p></div></div>
+                <div class="skill-item-row"><div class="skill-icon-large"><i class="fas fa-drafting-compass"></i></div><div class="skill-details"><h4>Conception Mécanique</h4><p>SolidWorks, Fusion 360, Impression 3D.</p></div></div>
+                <div class="skill-item-row"><div class="skill-icon-large"><i class="fas fa-bolt"></i></div><div class="skill-details"><h4>Électronique</h4><p>Conception PCB (KiCad), Soudure CMS.</p></div></div>
+                <div class="skill-item-row"><div class="skill-icon-large"><i class="fas fa-terminal"></i></div><div class="skill-details"><h4>Outils & Système</h4><p>Linux, Git/GitHub, Docker, Bash scripting.</p></div></div>
+                <div class="skill-item-row"><div class="skill-icon-large"><i class="fas fa-users"></i></div><div class="skill-details"><h4>Soft Skills</h4><p>Gestion de projet, Anglais B2, Travail d'équipe.</p></div></div>
+            </div>
+        </div>
+
+        <!-- CONTACT -->
+        <br><br>
+        <div class="contact-banner" id="contact" style="background: linear-gradient(135deg, #18181b 0%, #2e1065 100%);">
+            <h2>Prêt à innover ?</h2>
+            <p>Je recherche une école d'ingénieur pour transformer mes prototypes en solutions réelles.</p>
+            <a href="mailto:ton.email@gmail.com" class="hero-btn">Discuter de mon profil</a>
+        </div>
+
+    </div>
+
+    <!-- LE POPUP CACHÉ (MODAL) -->
+    <div id="modal-bras" class="modal-overlay" onclick="closeModal('modal-bras')">
+        <div class="modal-content" onclick="event.stopPropagation()"> <!-- stopPropagation évite de fermer si on clique DANS la fenêtre -->
+            <div class="modal-header">
+                <img src="https://placehold.co/1200x600/18181b/8b5cf6?text=Vue+SolidWorks+Projet" alt="Header Projet">
+                <button class="modal-close" onclick="closeModal('modal-bras')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <h2 style="margin-bottom: 5px;">Bras Manipulateur Mobile</h2>
+                <p style="color:var(--accent); font-weight:600; margin-bottom:20px;">Extension pour robot Unitree Go1</p>
+                
+                <div class="modal-tags">
+                    <span class="tag">SolidWorks</span>
+                    <span class="tag">Impression 3D</span>
+                    <span class="tag">Cinématique Inverse</span>
+                    <span class="tag">C++</span>
+                </div>
+
+                <div class="modal-section">
+                    <h4>🎯 L'Objectif</h4>
+                    <p>Transformer un robot quadrupède standard en plateforme d'intervention capable d'ouvrir des portes et manipuler des objets.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h4>⚙️ Mécanique & Conception</h4>
+                    <p>Modélisation complète sous <strong>SolidWorks</strong>. Utilisation de matériaux légers (PETG) et déportation des moteurs pour optimiser le centre de gravité.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h4>💻 Intelligence</h4>
+                    <p>Algorithme de cinématique inverse custom pour calculer les angles des articulations en temps réel selon la position (x,y,z) souhaitée.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <footer style="text-align: center; color: #555; font-size: 0.8rem; padding-bottom: 20px;">
+        &copy; 2024 Vuk Milic
+    </footer>
+
+    <!-- SCRIPT POUR OUVRIR/FERMER LE POPUP -->
+    <script>
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden'; // Empêche de scroller la page derrière
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto'; // Réactive le scroll
+        }
+    </script>
+
+</body>
+</html>
