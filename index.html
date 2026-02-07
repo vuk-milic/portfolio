@@ -72,7 +72,7 @@
         }
         .hero-content { position: relative; z-index: 1; max-width: 800px; padding-top: 60px; }
         .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
-        .hero p { font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 30px; max-width: 600px; font-weight: 400; }
+        .hero p { font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 30px; max-width: 550px; font-weight: 400; }
         .hero-btn {
             display: inline-block; background: var(--text-primary); color: black;
             font-weight: 700; padding: 15px 30px; border-radius: 12px;
@@ -198,9 +198,8 @@
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <!-- TITRE MODIFIÉ -->
-            <h1>Vuk Milic <br>Ingénierie &amp; Robotique.</h1>
-            <p>Étudiant en BUT GEII à l'IUT de Cachan, je développe et conçois des systèmes complexes, alliant mécanique, électronique et programmation.</p>
+            <h1>Vuk Milic <br>Ingénierie Robotique &amp; Systèmes Embarqués.</h1>
+            <p>Étudiant en BUT GEII, je développe et conçois des systèmes complexes, alliant mécanique, électronique et programmation.</p>
             <a href="#projects" class="hero-btn">Voir mes projets</a>
         </div>
     </section>
@@ -258,7 +257,6 @@
             <div class="card" onclick="openModal('modal-bras')">
                 <div class="card-image-container">
                     <span class="card-badge">EN COURS</span>
-                    <!-- ICI : J'ai remplacé le lien placeholder par ton image -->
                     <img src="Bras_robotise.jpg" alt="Bras Robot" class="card-img">
                 </div>
                 <div class="card-info">
@@ -304,7 +302,6 @@
     <div id="modal-bras" class="modal-overlay" onclick="closeModal('modal-bras')">
         <div class="modal-content" onclick="event.stopPropagation()"> <!-- stopPropagation évite de fermer si on clique DANS la fenêtre -->
             <div class="modal-header">
-                <!-- J'ai aussi mis ton image ici pour qu'on la voie en grand dans les détails -->
                 <img src="Bras_robotise.jpg" alt="Header Projet">
                 <button class="modal-close" onclick="closeModal('modal-bras')"><i class="fas fa-times"></i></button>
             </div>
@@ -316,22 +313,28 @@
                     <span class="tag">SolidWorks</span>
                     <span class="tag">Impression 3D</span>
                     <span class="tag">Cinématique Inverse</span>
-                    <span class="tag">C++</span>
+                    <span class="tag">PCA9685</span>
+                    <span class="tag">ESP32</span>
                 </div>
 
                 <div class="modal-section">
                     <h4>🎯 L'Objectif</h4>
-                    <p>Transformer un robot quadrupède standard en plateforme d'intervention capable d'ouvrir des portes et manipuler des objets.</p>
+                    <p>Transformer le Unitree Go1 en assistant domestique autonome capable de naviguer vers une pièce spécifique (ex: cuisine), d'ouvrir des portes fermées et de rapporter des objets (ex: une boisson).</p>
                 </div>
 
                 <div class="modal-section">
                     <h4>⚙️ Mécanique & Conception</h4>
-                    <p>Modélisation complète sous <strong>SolidWorks</strong>. Utilisation de matériaux légers (PETG) et déportation des moteurs pour optimiser le centre de gravité.</p>
+                    <p>Base open-source (Thingiverse) adaptée avec une <strong>pièce de fixation sur-mesure</strong> conçue pour le Go1. Le bras possède <strong>5 degrés de liberté</strong> et est actionné par des servomoteurs puissants (25kg/cm).</p>
                 </div>
 
                 <div class="modal-section">
-                    <h4>💻 Intelligence</h4>
-                    <p>Algorithme de cinématique inverse custom pour calculer les angles des articulations en temps réel selon la position (x,y,z) souhaitée.</p>
+                    <h4>🔌 Architecture Électronique</h4>
+                    <p>Architecture distribuée : Une <strong>Raspberry Pi</strong> calcule les trajectoires et envoie les angles à un <strong>ESP32</strong>. Celui-ci pilote les moteurs via un driver <strong>PCA9685</strong>. Gestion d'alimentation isolée : batterie dédiée + régulateur pour les servomoteurs afin de protéger la logique.</p>
+                </div>
+
+                <div class="modal-section">
+                    <h4>💻 Intelligence & Futur</h4>
+                    <p>Développement en cours de la <strong>cinématique inverse</strong> pour le contrôle précis et de la détection d'objets par caméra. Intégration prochaine d'une pince à mouvement linéaire.</p>
                 </div>
             </div>
         </div>
