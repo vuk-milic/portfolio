@@ -15,6 +15,7 @@
             --text-secondary: #a1a1aa; 
             --radius-round: 32px;      
             --radius-card: 16px;
+            --container-width: 1100px; /* Variable pour l'alignement global */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
@@ -58,10 +59,10 @@
         }
         .nav-btn-highlight:hover { transform: scale(1.05); }
 
-        /* --- HERO --- */
+        /* --- HERO (MODIFIÉ POUR ALIGNEMENT AIRBNB) --- */
         .hero {
             position: relative; height: 90vh; width: 100%;
-            display: flex; align-items: center; padding: 0 5%;
+            display: flex; align-items: center; justify-content: center; /* Centre le conteneur */
             overflow: hidden; background: #000;
         }
         .hero-bg {
@@ -70,9 +71,17 @@
                         url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover; background-position: center; z-index: 0;
         }
-        .hero-content { position: relative; z-index: 1; max-width: 800px; padding-top: 60px; }
+        .hero-content { 
+            position: relative; z-index: 1; 
+            width: 100%; max-width: var(--container-width); /* Même largeur que le reste du site */
+            padding: 0 24px; /* Mêmes marges que le reste */
+            padding-top: 60px; 
+        }
+        /* Limitation de la largeur du texte uniquement, pas du conteneur */
+        .hero-text-block { max-width: 650px; } 
+
         .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
-        .hero p { font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 30px; max-width: 550px; font-weight: 400; }
+        .hero p { font-size: 1.3rem; color: var(--text-secondary); margin-bottom: 30px; font-weight: 400; }
         .hero-btn {
             display: inline-block; background: var(--text-primary); color: black;
             font-weight: 700; padding: 15px 30px; border-radius: 12px;
@@ -81,7 +90,7 @@
         .hero-btn:hover { transform: translateY(-2px); background: #e2e2e2; }
 
         /* --- SECTIONS --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 24px; }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 60px 24px; }
         h2 { font-size: 1.8rem; margin-bottom: 30px; font-weight: 700; color: var(--text-primary); }
 
         /* --- SKILLS --- */
@@ -198,10 +207,12 @@
     <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <!-- TITRE MIS À JOUR -->
-            <h1>Vuk Milic <br>Robotique &amp; Systèmes Embarqués.</h1>
-            <p>Étudiant en BUT GEII, je développe et conçois des systèmes complexes, alliant mécanique, électronique et programmation.</p>
-            <a href="#projects" class="hero-btn">Voir mes projets</a>
+            <!-- TITRE RÉTABLI & ALIGNÉ (SANS "INGÉNIERIE") -->
+            <div class="hero-text-block">
+                <h1>Vuk Milic <br>Robotique &amp; Systèmes Embarqués.</h1>
+                <p>Étudiant en BUT GEII, je développe et conçois des systèmes complexes, alliant mécanique, électronique et programmation.</p>
+                <a href="#projects" class="hero-btn">Voir mes projets</a>
+            </div>
         </div>
     </section>
 
